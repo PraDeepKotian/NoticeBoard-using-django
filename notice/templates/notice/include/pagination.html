@@ -1,0 +1,42 @@
+
+<nav arial-label="page navigation">
+  {% if  page.has_other_pages %}
+    <ul class="pagination">
+        {% if page.has_previous %}
+          <li>
+          <a href="?page={{ page.previous_page_number }}">
+          <span>Previous</span>
+          </a>
+          </li>
+        {% else %}
+          <li class="disabled">
+          <a href="#">
+          <span>Previous</span>
+          </a>
+          </li>
+        {% endif %}
+
+      {% for pages in page.paginator.page_range %}
+        {% if page.number == pages %}
+          <li class="active"><span>{{pages}}<span class="sr-only">(current)</span></span></li>
+        {% else %}
+          <li><a href="?page={{page.pages}}">{{pages}}</a></li>
+        {% endif %}
+      {% endfor %}
+
+      {% if page.has_next %}
+        <li>
+        <a href="?page={{ page.next_page_number }}">
+        <span>Next</span>
+        </a>
+        </li>
+      {% else %}
+        <li {% if not page_obj.has_next %}class="disabled"{% endif %}>
+        <a href="#">
+        <span>Next</span>
+        </a>
+        </li>
+      {% endif %}
+    </ul>          
+  {% endif %}
+</nav>

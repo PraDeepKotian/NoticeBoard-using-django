@@ -1,0 +1,139 @@
+ <!--NavBar--> 
+{% include "notice/include/header.html" %}
+
+    <!-- Page Content -->
+    <div class="container">
+        {% block content %}    
+        <!-- Page Heading/Breadcrumbs -->
+        <h1 class="mt-4 mb-3">{{ notice.title }} <small>by <a href="#">Admin</a></small></h1>
+
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/">Home</a>
+            </li>
+            <li class="breadcrumb-item active"><small>{{ notice.title }}</small></li>
+        </ol>
+
+        <div class="row">
+
+            <!-- Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Preview Image -->
+                <img class="img-fluid rounded" id="myImg" src="{{ notice.picture.url }}" alt="">
+
+                <hr>
+
+                <!-- Date/Time -->
+                <p>Posted on {{notice.date}}</p>
+
+                <hr>
+
+                <!-- Post Content -->
+                <p class="lead">{{notice.body|safe|linebreaks}}</p>
+                {% endblock %}
+                <hr>
+
+                <!-- Comments Form -->
+                <div class="card my-4">
+                    <h5 class="card-header">Leave a Comment:</h5>
+                    <div class="card-block">
+                        <form>
+                            <div class="form-group">
+                                <textarea class="form-control" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>               
+
+            </div>
+
+            <!-- Sidebar Widgets Column -->
+            <div class="col-md-4">             
+
+                <!-- Categories Widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">Categories</h5>
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li><a href="#">#TnP</a></li>
+                                    <li><a href="#">#General</a></li>
+                                    <li><a href="#">#Staff</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li><a href="#">#IT</a></li>
+                                    <li><a href="#">#EXTC</a></li>
+                                    <li><a href="#">#CMPN</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Side Widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">IMPORTANT!</h5>
+                    <div class="card-block">
+                        Important notice will highlight here.
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- The Modal -->
+        <div id="myModal" class="modal">
+            <!-- Modal content -->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <span class="close">&times;</span>
+                  <h3><a href="/notice/{{notice.id}}">{{ notice.title }}</a></h3>
+                </div>
+                <div class="modal-body">
+                   <img class="modal-content" id="img01">
+                </div>
+                <div class="modal-footer">
+                  <h3></h3>
+                </div>
+              </div>
+        
+       
+        <div id="caption"></div>
+        <span class="close">&times;</span>
+        </div>
+
+        <script>
+        // Get the modal
+        var modal = document.getElementById('myModal');
+
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+        var img = document.getElementById('myImg');
+        var modalImg = document.getElementById("img01");
+        var captionText = document.getElementById("caption");
+        img.onclick = function(){
+        modal.style.display = "block";
+        modalImg.src = this.src;
+        captionText.innerHTML = this.alt;
+        }
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() { 
+        modal.style.display = "none";
+        }
+        </script>
+
+ <!--footer--> 
+{% include "notice/include/footer.html" %} 
